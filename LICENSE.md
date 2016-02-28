@@ -4,6 +4,7 @@
 > hang@hotmail.com
 
 1. You are explicitly forbidden to do the following:
+  
   1a. Outright copyright infringement - Don't just copy this and change the name. (ironic since I copied this from [DBAD] (https://github.com/philsturgeon/dbad/blob/master/LICENSE-en.md))
   
   1b. Selling the unmodified original source with no work done what-so-ever. (You know who I'm talking about. Asshole.)

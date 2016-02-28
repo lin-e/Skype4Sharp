@@ -15,11 +15,12 @@ namespace ExampleBot
 {
     class Program
     {
-        static Skype4Sharp.Skype4Sharp mainSkype;
-        static SkypeCredentials authCreds = new SkypeCredentials("username", "password");
+        Skype4Sharp.Skype4Sharp mainSkype;
+        SkypeCredentials authCreds;
         static string triggerString = "!";
-        static void Main(string[] args)
+        public Program(SkypeCredentials authCreds)
         {
+            this.authCreds = authCreds;
             mainSkype = new Skype4Sharp.Skype4Sharp(authCreds);
             Console.WriteLine("[DEBUG]: Logging in with {0}:{1}", authCreds.Username, string.Join("", Enumerable.Repeat("*", authCreds.Password.Length)));
             mainSkype.Login();
@@ -29,10 +30,14 @@ namespace ExampleBot
             Console.WriteLine("[DEBUG]: Events set");
             mainSkype.StartPoll();
             Console.WriteLine("[DEBUG]: Poll started");
+        }
+        static void Main(string[] args)
+        {
+            new Program(new SkypeCredentials("USERNAME", "PASSWORD"));
             while (true) { }
         }
 
-        private static void MainSkype_contactRequestReceived(ContactRequest sentRequest)
+        private void MainSkype_contactRequestReceived(ContactRequest sentRequest)
         {
             new Thread(() =>
             {
@@ -42,7 +47,7 @@ namespace ExampleBot
             }).Start();
         }
 
-        private static void MainSkype_messageReceived(ChatMessage pMessage)
+        private void MainSkype_messageReceived(ChatMessage pMessage)
         {
             new Thread(() =>
             {
@@ -192,11 +197,11 @@ namespace ExampleBot
                 } catch { }
             }).Start();
         }
-        public static string toImgur(string rawURL)
+        public string toImgur(string rawURL)
         {
             string imgurURL = "";
             WebClient w = new WebClient();
-            w.Headers.Add("Authorization", "Client-ID imgur_key");
+            w.Headers.Add("Authorization", "Client-ID IMGUR_KEY");
             System.Collections.Specialized.NameValueCollection Keys = new System.Collections.Specialized.NameValueCollection();
             Keys.Add("image", Convert.ToBase64String(w.DownloadData(rawURL)));
             byte[] responseArray = w.UploadValues("https://api.imgur.com/3/image", Keys);

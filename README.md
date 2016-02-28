@@ -14,7 +14,7 @@ Simple Web Skype implementation for C#
 - MessageEdited
 - MessageReceived
 - TopicChange
-- 
+
 # Usage
 Look at the example bot for a working template, but if you really need full documentation, I'll provide it below.
 The example is in C# Console, but it should be easy enough to adapt.
@@ -83,3 +83,5 @@ private static void MainSkype_messageReceived(ChatMessage pMessage)
   newChat.Kick("eroded");
 }
 ```
+# Contact
+If you have any issues, feel free to message me on Skype ('c0mmodity') or eMail me. My eMail is on my profile.

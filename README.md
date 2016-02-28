@@ -9,6 +9,7 @@ Simple Web Skype implementation for C#
 > yung trump has permission to skid aids code to c#
 
 - [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having, and moral support
+- [Knackrack615] (http://knackrack615.me/) Helped with basic logic in the library
 
 # Events
 - ChatMembersChanged

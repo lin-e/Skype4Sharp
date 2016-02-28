@@ -5,7 +5,9 @@ Simple Web Skype implementation for C#
 
 # Credits
 - [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. And the MSPN24 token method
+
 > yung trump has permission to skid aids code to c#
+
 - [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having, and moral support
 
 # Events

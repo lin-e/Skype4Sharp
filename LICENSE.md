@@ -21,7 +21,7 @@
   
   2b. Additionally, if you were to distribute a modified source, it should be held under the same license, which allows us to all share code, and for all content creators to receive the credit they deserve.
   
-  2c. I (lin-e) reserve the right to the source, compiled code, etc. for any reason (or no reason).
+  2c. I (lin-e) reserve the right to DMCA forks, source, compiled code, etc.
 
 3. If there are any issues with the code, I will not be held liable.
 

@@ -60,6 +60,7 @@
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\SkypeTokenType.cs" />
     <Compile Include="Enums\UserType.cs" />
+    <Compile Include="Events\CallStartedEvent.cs" />
     <Compile Include="Events\ChatMembersChangedEvent.cs" />
     <Compile Include="Events\ContactReceivedEvent.cs" />
     <Compile Include="Events\ContactRequestReceivedEvent.cs" />

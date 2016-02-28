@@ -117,6 +117,7 @@ namespace Skype4Sharp.Events
                         case "Text":
                         case "RichText":
                         case "RichText/Contacts":
+                        case "Event/Call":
                             {
                                 Chat messageChat = new Chat(parentSkype);
                                 messageChat.ChatLink = (string)singleMessage.resource.conversationLink;
@@ -180,6 +181,11 @@ namespace Skype4Sharp.Events
                                             sentContact.Username = (contactUsername.Length == 0) ? sentContact.DisplayName : contactUsername;
                                             sentContact.Type = Enums.UserType.Normal; // I doubt you can send a guest as a contact.
                                             parentSkype.invokeContactReceived(sentContact, messageChat, messageSender);
+                                        }
+                                        break;
+                                    case "Event/Call":
+                                        {
+                                            parentSkype.invokeCallStarted(messageChat, messageSender);
                                         }
                                         break;
                                 }

@@ -27,10 +27,20 @@ namespace ExampleBot
             Console.WriteLine("[DEBUG]: Login complete");
             mainSkype.messageReceived += MainSkype_messageReceived;
             mainSkype.contactRequestReceived += MainSkype_contactRequestReceived;
+            mainSkype.callStarted += MainSkype_callStarted;
             Console.WriteLine("[DEBUG]: Events set");
             mainSkype.StartPoll();
             Console.WriteLine("[DEBUG]: Poll started");
         }
+
+        private void MainSkype_callStarted(Chat originChat, User eventInitiator)
+        {
+            new Thread(() =>
+            {
+                Console.WriteLine("[EVENT]: CALL_STARTED > {0} ({1})", originChat.ID, eventInitiator.Username);
+            }).Start();
+        }
+
         static void Main(string[] args)
         {
             new Program(new SkypeCredentials("USERNAME", "PASSWORD"));
@@ -201,7 +211,7 @@ namespace ExampleBot
         {
             string imgurURL = "";
             WebClient w = new WebClient();
-            w.Headers.Add("Authorization", "Client-ID IMGUR_KEY");
+            w.Headers.Add("Authorization", "Client-ID KEY");
             System.Collections.Specialized.NameValueCollection Keys = new System.Collections.Specialized.NameValueCollection();
             Keys.Add("image", Convert.ToBase64String(w.DownloadData(rawURL)));
             byte[] responseArray = w.UploadValues("https://api.imgur.com/3/image", Keys);

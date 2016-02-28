@@ -10,6 +10,7 @@ namespace Skype4Sharp
         public event Events.ChatMembersChanged chatMembersChanged;
         public event Events.TopicChange topicChange;
         public event Events.ContactRequestReceived contactRequestReceived;
+        public event Events.CallStarted callStarted;
 
         public Auth.SkypeCredentials authInfo;
         public Auth.Tokens authTokens = new Auth.Tokens();
@@ -162,6 +163,13 @@ namespace Skype4Sharp
                 contactRequestReceived.Invoke(sentRequest);
             }
             catch { }
+        }
+        public void invokeCallStarted(Chat originChat, User eventInitiator)
+        {
+            try
+            {
+                callStarted.Invoke(originChat, eventInitiator);
+            } catch { }
         }
         private void blockUnauthorized()
         {

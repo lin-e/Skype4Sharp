@@ -16,7 +16,7 @@ namespace ExampleBot
     class Program
     {
         static Skype4Sharp.Skype4Sharp mainSkype;
-        static SkypeCredentials authCreds = new SkypeCredentials("USERNAME", "PASSWORD");
+        static SkypeCredentials authCreds = new SkypeCredentials("username", "password");
         static string triggerString = "!";
         static void Main(string[] args)
         {
@@ -75,7 +75,6 @@ namespace ExampleBot
                                 }
                                 break;
                             case "currency":
-                                if (true)
                                 {
                                     rMessage.Body = "Getting current exchange rates...";
                                     try
@@ -96,7 +95,6 @@ namespace ExampleBot
                                 }
                                 break;
                             case "btcwallet":
-                                if (true)
                                 {
                                     rMessage.Body = "Generating a Bitcoin keypair...";
                                     try
@@ -113,41 +111,42 @@ namespace ExampleBot
                                 }
                                 break;
                             case "numberfact":
-                                if (commandArgs.Length > 1)
                                 {
-                                    rMessage.Body = "Finding a fact about " + commandArgs[1] + "...";
-                                    try
+                                    if (commandArgs.Length > 1)
                                     {
-                                        int testConvert = Convert.ToInt16(commandArgs[1]);
-                                        string mathArgument = "trivia";
-                                        if (commandArgs.Length > 2)
-                                        {
-                                            if ((commandArgs[2].ToLower() == "math") || (commandArgs[2].ToLower() == "year"))
-                                            {
-                                                mathArgument = commandArgs[2].ToLower();
-                                            }
-                                        }
+                                        rMessage.Body = "Finding a fact about " + commandArgs[1] + "...";
                                         try
                                         {
-                                            rMessage.Body = "<b>" + commandArgs[1] + ":</b> " + webClient.DownloadString("http://numbersapi.com/" + commandArgs[1] + "/" + mathArgument);
+                                            int testConvert = Convert.ToInt16(commandArgs[1]);
+                                            string mathArgument = "trivia";
+                                            if (commandArgs.Length > 2)
+                                            {
+                                                if ((commandArgs[2].ToLower() == "math") || (commandArgs[2].ToLower() == "year"))
+                                                {
+                                                    mathArgument = commandArgs[2].ToLower();
+                                                }
+                                            }
+                                            try
+                                            {
+                                                rMessage.Body = "<b>" + commandArgs[1] + ":</b> " + webClient.DownloadString("http://numbersapi.com/" + commandArgs[1] + "/" + mathArgument);
+                                            }
+                                            catch
+                                            {
+                                                apiError = true;
+                                            }
                                         }
                                         catch
                                         {
-                                            apiError = true;
+                                            rMessage.Body = "'" + commandArgs[1] + "' is not a valid value for an integer.";
                                         }
                                     }
-                                    catch
+                                    else
                                     {
-                                        rMessage.Body = "'" + commandArgs[1] + "' is not a valid value for an integer.";
+                                        rMessage.Body = "Syntax error. The correct syntax for this command is " + triggerString + "numberfact <number> [math|trivia|year]".HtmlEncode();
                                     }
-                                }
-                                else
-                                {
-                                    rMessage.Body = "Syntax error. The correct syntax for this command is " + triggerString + "numberfact <number> [math|trivia|year]".HtmlEncode();
                                 }
                                 break;
                             case "visualdns":
-                                if (true)
                                 {
                                     if (commandArgs.Length == 2)
                                     {
@@ -157,8 +156,8 @@ namespace ExampleBot
                                             string rawDownload = toImgur("http://www.inmotionhosting.com/support/modules/mod_visual_dig/visual_dig.php?domain=" + commandArgs[1]);
                                             if (rawDownload.EndsWith(".gif"))
                                             {
-                                                rawDownload = "There has been an error generating an image. You have either:" + Environment.NewLine
-                                                    + " - entered an invalid domain" + Environment.NewLine
+                                                rawDownload = "There has been an error generating an image. Possible errors:" + Environment.NewLine
+                                                    + " - You've entered an invalid domain" + Environment.NewLine
                                                     + " - The DNS servers aren't set up properly" + Environment.NewLine
                                                     + " - You have entered a subdomain (like www.) or you added 'http://'";
                                                 rMessage.Body = rawDownload;
@@ -197,7 +196,7 @@ namespace ExampleBot
         {
             string imgurURL = "";
             WebClient w = new WebClient();
-            w.Headers.Add("Authorization", "Client-ID IMGUR_KEY");
+            w.Headers.Add("Authorization", "Client-ID imgur_key");
             System.Collections.Specialized.NameValueCollection Keys = new System.Collections.Specialized.NameValueCollection();
             Keys.Add("image", Convert.ToBase64String(w.DownloadData(rawURL)));
             byte[] responseArray = w.UploadValues("https://api.imgur.com/3/image", Keys);

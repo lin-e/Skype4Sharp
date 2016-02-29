@@ -3,6 +3,10 @@ Simple Web Skype implementation for C#
 # Dependencies
 - [Json.NET] (http://www.newtonsoft.com/json)
 
+# Forum Posts (Any post regarding this is not me, other than those listed below)
+- [HackForums] (http://hackforums.net/showthread.php?tid=5187718)
+- [LeakForums] (https://leakforums.net/thread-687213)
+
 # Credits
 - [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. And the MSPN24 token method
 

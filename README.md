@@ -16,13 +16,16 @@ Simple Web Skype implementation for C#
 - [Knackrack615] (http://knackrack615.me/) Helped with basic logic in the library
 
 # Events
-- ChatMembersChanged
-- ContactReceived
-- ContactRequestReceived
-- MessageEdited
-- MessageReceived
-- TopicChange
-- CallStarted
+- [x] ChatMembersChanged
+- [x] ContactReceived
+- [x] ContactRequestReceived
+- [x] MessageEdited
+- [x] MessageReceived
+- [x] TopicChange
+- [x] CallStarted
+- [ ] UserRoleChanged
+- [ ] FileReceived
+- [ ] PictureReceived
 
 # Usage
 Look at the example bot for a working template, but if you really need full documentation, I'll provide it below.

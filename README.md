@@ -18,7 +18,7 @@ Simple Web Skype implementation for C#
 - MessageEdited
 - MessageReceived
 - TopicChange
-- callStarted
+- CallStarted
 
 # Usage
 Look at the example bot for a working template, but if you really need full documentation, I'll provide it below.

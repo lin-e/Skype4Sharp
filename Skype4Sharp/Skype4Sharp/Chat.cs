@@ -77,6 +77,10 @@ namespace Skype4Sharp
             HttpWebRequest addUserRequest = parentSkype.mainFactory.createWebRequest_PUT("https://client-s.gateway.messenger.live.com/v1/threads/" + ID + "/members/8:" + usernameToAdd.ToLower(), new string[][] { new string[] { "RegistrationToken", parentSkype.authTokens.RegistrationToken } }, Encoding.ASCII.GetBytes("{\"role\":\"User\"}"), "application/json");
             using (HttpWebResponse webResponse = (HttpWebResponse)addUserRequest.GetResponse()) { }
         }
+        public void Leave()
+        {
+            Kick(parentSkype.selfProfile.Username);
+        }
         public void SetAdmin(string usernameToPromote)
         {
             checkChatType();

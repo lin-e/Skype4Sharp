@@ -76,6 +76,7 @@ namespace Skype4Sharp.Events
                         case "ThreadActivity/DeleteMember":
                         case "ThreadActivity/AddMember":
                         case "ThreadActivity/TopicUpdate":
+                        case "ThreadActivity/PictureUpdate":
                             {
                                 Chat messageChat = new Chat(parentSkype);
                                 messageChat.ChatLink = (string)singleMessage.resource.conversationLink;
@@ -109,6 +110,14 @@ namespace Skype4Sharp.Events
                                             parentSkype.invokeTopicChange(messageChat, eventInitiator, newTopic.HtmlDecode());
                                         }
                                         break;
+                                    case "ThreadActivity/PictureUpdate":
+                                        {
+                                            Regex pictureFinder = new Regex("<pictureupdate><eventtime>(.*?)</eventtime><initiator>8:(.*?)</initiator><value>(.*?)</value></pictureupdate>");
+                                            User eventInitiator = parentSkype.GetUser(pictureFinder.Match(((string)singleMessage.resource.content)).Groups[2].ToString());
+                                            string imageURL = pictureFinder.Match(((string)singleMessage.resource.content)).Groups[3].ToString();
+                                            parentSkype.invokeChatPictureChanged(messageChat, eventInitiator, imageURL.Remove(0, 4));
+                                        }
+                                        break;
                                 }
                             }
                             break;
@@ -118,6 +127,7 @@ namespace Skype4Sharp.Events
                         case "RichText":
                         case "RichText/Contacts":
                         case "Event/Call":
+                        case "RichText/Files":
                             {
                                 Chat messageChat = new Chat(parentSkype);
                                 messageChat.ChatLink = (string)singleMessage.resource.conversationLink;
@@ -186,6 +196,21 @@ namespace Skype4Sharp.Events
                                     case "Event/Call":
                                         {
                                             parentSkype.invokeCallStarted(messageChat, messageSender);
+                                        }
+                                        break;
+                                    case "RichText/Files":
+                                        {
+                                            string rawContents = (string)singleMessage.resource.content;
+                                            Regex fileInfo = new Regex("<file size=\"(.*?)\" index=\"(.*?)\" tid=\"(.*?)\">(.*?)</file>");
+                                            foreach (Match singleMatch in fileInfo.Matches(rawContents))
+                                            {
+                                                SkypeFile sentFile = new SkypeFile(parentSkype);
+                                                sentFile.Sender = messageSender;
+                                                sentFile.Chat = messageChat;
+                                                sentFile.Name = singleMatch.Groups[4].ToString();
+                                                sentFile.Size = Convert.ToInt32(singleMatch.Groups[1].ToString());
+                                                parentSkype.invokeFileReceived(sentFile);
+                                            }
                                         }
                                         break;
                                 }

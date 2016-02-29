@@ -11,6 +11,8 @@ namespace Skype4Sharp
         public event Events.TopicChange topicChange;
         public event Events.ContactRequestReceived contactRequestReceived;
         public event Events.CallStarted callStarted;
+        public event Events.FileReceived fileReceived;
+        public event Events.ChatPictureChanged chatPictureChanged;
 
         public Auth.SkypeCredentials authInfo;
         public Auth.Tokens authTokens = new Auth.Tokens();
@@ -170,6 +172,22 @@ namespace Skype4Sharp
             {
                 callStarted.Invoke(originChat, eventInitiator);
             } catch { }
+        }
+        public void invokeFileReceived(Events.SkypeFile sentFile)
+        {
+            try
+            {
+                fileReceived.Invoke(sentFile);
+            }
+            catch { }
+        }
+        public void invokeChatPictureChanged(Chat targetChat, User eventInitiator, string newPicture)
+        {
+            try
+            {
+                chatPictureChanged.Invoke(targetChat, eventInitiator, newPicture);
+            }
+            catch { }
         }
         private void blockUnauthorized()
         {

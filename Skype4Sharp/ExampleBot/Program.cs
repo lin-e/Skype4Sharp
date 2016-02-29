@@ -27,18 +27,9 @@ namespace ExampleBot
             Console.WriteLine("[DEBUG]: Login complete");
             mainSkype.messageReceived += MainSkype_messageReceived;
             mainSkype.contactRequestReceived += MainSkype_contactRequestReceived;
-            mainSkype.callStarted += MainSkype_callStarted;
             Console.WriteLine("[DEBUG]: Events set");
             mainSkype.StartPoll();
             Console.WriteLine("[DEBUG]: Poll started");
-        }
-
-        private void MainSkype_callStarted(Chat originChat, User eventInitiator)
-        {
-            new Thread(() =>
-            {
-                Console.WriteLine("[EVENT]: CALL_STARTED > {0} ({1})", originChat.ID, eventInitiator.Username);
-            }).Start();
         }
 
         static void Main(string[] args)

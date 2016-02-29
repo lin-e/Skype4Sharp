@@ -26,7 +26,7 @@ Simple Web Skype implementation for C#
 - [x] MessageReceived
 - [x] TopicChange
 - [x] CallStarted
-- [ ] UserRoleChanged
+- [x] UserRoleChanged
 - [x] GroupPictureChanged
 - [x] FileReceived
 - [ ] PictureReceived
@@ -97,6 +97,7 @@ private static void MainSkype_messageReceived(ChatMessage pMessage)
   newChat.SetAdmin("c0mmodity");
   Console.WriteLine("c0mmodity is a(n) {0}", newChat.UserRole("c0mmodity").ToString());
   newChat.Kick("eroded");
+  newChat.Leave();
 }
 ```
 Logging a call

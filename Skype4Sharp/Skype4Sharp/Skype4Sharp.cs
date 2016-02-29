@@ -13,6 +13,7 @@ namespace Skype4Sharp
         public event Events.CallStarted callStarted;
         public event Events.FileReceived fileReceived;
         public event Events.ChatPictureChanged chatPictureChanged;
+        public event Events.UserRoleChanged userRoleChanged;
 
         public Auth.SkypeCredentials authInfo;
         public Auth.Tokens authTokens = new Auth.Tokens();
@@ -186,6 +187,14 @@ namespace Skype4Sharp
             try
             {
                 chatPictureChanged.Invoke(targetChat, eventInitiator, newPicture);
+            }
+            catch { }
+        }
+        public void invokeUserRoleChanged(Chat newChat, User eventInitiator, User eventTarget, Enums.ChatRole newRole)
+        {
+            try
+            {
+                userRoleChanged.Invoke(newChat, eventInitiator, eventTarget, newRole);
             }
             catch { }
         }

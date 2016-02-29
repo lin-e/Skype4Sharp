@@ -77,6 +77,7 @@ namespace Skype4Sharp.Events
                         case "ThreadActivity/AddMember":
                         case "ThreadActivity/TopicUpdate":
                         case "ThreadActivity/PictureUpdate":
+                        case "ThreadActivity/RoleUpdate":
                             {
                                 Chat messageChat = new Chat(parentSkype);
                                 messageChat.ChatLink = (string)singleMessage.resource.conversationLink;
@@ -116,6 +117,16 @@ namespace Skype4Sharp.Events
                                             User eventInitiator = parentSkype.GetUser(pictureFinder.Match(((string)singleMessage.resource.content)).Groups[2].ToString());
                                             string imageURL = pictureFinder.Match(((string)singleMessage.resource.content)).Groups[3].ToString();
                                             parentSkype.invokeChatPictureChanged(messageChat, eventInitiator, imageURL.Remove(0, 4));
+                                        }
+                                        break;
+                                    case "ThreadActivity/RoleUpdate":
+                                        {
+                                            Regex roleFinder = new Regex("<roleupdate><eventtime>(.*?)</eventtime><initiator>8:(.*?)</initiator><target><id>8:(.*?)</id><role>(.*?)</role></target></roleupdate>");
+                                            User eventInitiator = parentSkype.GetUser(roleFinder.Match(((string)singleMessage.resource.content)).Groups[2].ToString());
+                                            User eventTarget = parentSkype.GetUser(roleFinder.Match(((string)singleMessage.resource.content)).Groups[3].ToString());
+                                            string newRoleString = roleFinder.Match(((string)singleMessage.resource.content)).Groups[4].ToString();
+                                            Enums.ChatRole newRole = (newRoleString == "user") ? Enums.ChatRole.User : Enums.ChatRole.Admin;
+                                            parentSkype.invokeUserRoleChanged(messageChat, eventInitiator, eventTarget, newRole);
                                         }
                                         break;
                                 }

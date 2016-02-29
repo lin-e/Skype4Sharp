@@ -70,6 +70,7 @@
     <Compile Include="Events\MessageReceivedEvent.cs" />
     <Compile Include="Events\Poller.cs" />
     <Compile Include="Events\TopicChangeEvent.cs" />
+    <Compile Include="Events\UserRoleChangedEvent.cs" />
     <Compile Include="Exceptions\InvalidSkypeAction.cs" />
     <Compile Include="Exceptions\InvalidSkypeParameter.cs" />
     <Compile Include="Helpers\Extensions.cs" />

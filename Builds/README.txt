@@ -2,4 +2,4 @@ Since some of you probably just want to get started with the bot, instead of bui
 
 THE NORMAL LICENSE STILL APPLIES
 
-[Lastest as of 17:16 29/02/2016]
+[Lastest as of 19:16 29/02/2016]

@@ -1,7 +1,7 @@
 # Skype4Sharp
 Simple Web Skype implementation for C#
 
-# [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md)
+# [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md) - You agree to this if you use any of my code.
 
 # Dependencies
 - [Json.NET] (http://www.newtonsoft.com/json)

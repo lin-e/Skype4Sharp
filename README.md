@@ -27,8 +27,8 @@ Simple Web Skype implementation for C#
 - [x] TopicChange
 - [x] CallStarted
 - [ ] UserRoleChanged
-- [ ] GroupPictureChanged
-- [ ] FileReceived
+- [x] GroupPictureChanged
+- [x] FileReceived
 - [ ] PictureReceived
 
 # Usage

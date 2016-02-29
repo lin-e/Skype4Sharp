@@ -1,5 +1,8 @@
 # Skype4Sharp
 Simple Web Skype implementation for C#
+
+# [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md)
+
 # Dependencies
 - [Json.NET] (http://www.newtonsoft.com/json)
 
@@ -102,5 +105,40 @@ private void MainSkype_callStarted(Chat originChat, User eventInitiator)
   Console.WriteLine("[EVENT]: CALL_STARTED > {0} ({1})", originChat.ID, eventInitiator.Username);
 }
 ```
+
 # Contact
 If you have any issues, feel free to message me on Skype ('c0mmodity') or eMail me. My eMail is on my profile.
+
+# FAQ
+(Not actually questions I've been asked, just what I'd assume would be asked.)
+---
+Q : Why didn't you sell this?
+
+A : It's not my code to sell. Also, as Skype4COM is bad enough as it is, you C# devs deserve options.
+
+---
+Q : This isn't working! I need help.
+
+A : No. I don't offer formal support. If you really are stuck, message me on Skype (found in the Contacts section).
+
+---
+Q : I have a new feature I'd like for you to add.
+
+A : Sure! Please raise it as an issue and I'll get back to you as soon as I can.
+
+---
+Q : Can I sell this code?
+
+A : No. Read LICENSE.md if you want a more detailed answer, but you cannot sell my code as is, without any obvious modifications.
+
+---
+Q : *feature* is broken, what can I do?
+
+A : Raise it as an issue, and I'll sort it out when I can. Please understand that I'm not paid for this, and I do have real world commitments.
+
+---
+Q : Wow! This is amazing, how can I help? (yeah, no-one's actually said this, but it'd be nice, y'know?)
+
+A : You can donate to me via Bitcoin (1BKbYhqNVkKzZ5Q5p7Jtb2MyautnqBC9Qm), or just send me a nice message :smile:
+
+---

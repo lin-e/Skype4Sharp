@@ -18,6 +18,7 @@ Simple Web Skype implementation for C#
 - MessageEdited
 - MessageReceived
 - TopicChange
+- callStarted
 
 # Usage
 Look at the example bot for a working template, but if you really need full documentation, I'll provide it below.
@@ -85,6 +86,13 @@ private static void MainSkype_messageReceived(ChatMessage pMessage)
   newChat.SetAdmin("c0mmodity");
   Console.WriteLine("c0mmodity is a(n) {0}", newChat.UserRole("c0mmodity").ToString());
   newChat.Kick("eroded");
+}
+```
+Logging a call
+```
+private void MainSkype_callStarted(Chat originChat, User eventInitiator)
+{
+  Console.WriteLine("[EVENT]: CALL_STARTED > {0} ({1})", originChat.ID, eventInitiator.Username);
 }
 ```
 # Contact

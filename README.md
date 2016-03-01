@@ -1,6 +1,8 @@
 # Skype4Sharp
 Simple Web Skype implementation for C#
 
+If you do anything cool with this lib, be sure to tell me :)
+
 # [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md) - You agree to this if you use any of my code.
 
 # Dependencies

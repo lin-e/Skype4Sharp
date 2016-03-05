@@ -1,7 +1,9 @@
 # Skype4Sharp
 Simple Web Skype implementation for C#
 
-# [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md)
+If you do anything cool with this lib, be sure to tell me :)
+
+# [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md) - You agree to this if you use any of my code.
 
 # Dependencies
 - [Json.NET] (http://www.newtonsoft.com/json)
@@ -26,7 +28,7 @@ Simple Web Skype implementation for C#
 - [x] MessageReceived
 - [x] TopicChange
 - [x] CallStarted
-- [ ] UserRoleChanged
+- [x] UserRoleChanged
 - [x] GroupPictureChanged
 - [x] FileReceived
 - [ ] PictureReceived
@@ -97,6 +99,7 @@ private static void MainSkype_messageReceived(ChatMessage pMessage)
   newChat.SetAdmin("c0mmodity");
   Console.WriteLine("c0mmodity is a(n) {0}", newChat.UserRole("c0mmodity").ToString());
   newChat.Kick("eroded");
+  newChat.Leave();
 }
 ```
 Logging a call

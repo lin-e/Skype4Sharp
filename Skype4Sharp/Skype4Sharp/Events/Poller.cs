@@ -25,40 +25,54 @@ namespace Skype4Sharp.Events
             {
                 while (true)
                 {
-                    string rawInfo = "";
-                    HttpWebRequest webRequest = parentSkype.mainFactory.createWebRequest_POST("https://client-s.gateway.messenger.live.com/v1/users/ME/endpoints/SELF/subscriptions/0/poll", new string[][] { new string[] { "RegistrationToken", parentSkype.authTokens.RegistrationToken } }, Encoding.ASCII.GetBytes(""), "application/json");
-                    using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
+                    try
                     {
-                        rawInfo = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+                        string rawInfo = "";
+                        HttpWebRequest webRequest = parentSkype.mainFactory.createWebRequest_POST("https://client-s.gateway.messenger.live.com/v1/users/ME/endpoints/SELF/subscriptions/0/poll", new string[][] { new string[] { "RegistrationToken", parentSkype.authTokens.RegistrationToken } }, Encoding.ASCII.GetBytes(""), "application/json");
+                        using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
+                        {
+                            rawInfo = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+                        }
+                        ProcessPoll(rawInfo);
                     }
-                    ProcessPoll(rawInfo);
+                    catch (Exception thrownException)
+                    {
+                        Console.WriteLine(thrownException.ToString());
+                    }
                 }
             }).Start();
             new Thread(() => // Contact Requests
             {
                 while (true)
                 {
-                    HttpWebRequest webRequest = parentSkype.mainFactory.createWebRequest_GET("https://api.skype.com/users/self/contacts/auth-request", new string[][] { new string[] { "X-Skypetoken", parentSkype.authTokens.SkypeToken } });
-                    string rawInfo = "";
-                    using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
+                    try
                     {
-                        rawInfo = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
-                    }
-                    dynamic allData = JsonConvert.DeserializeObject(rawInfo);
-                    foreach (dynamic singleRequest in allData)
-                    {
-                        string senderName = (string)singleRequest.sender;
-                        if (!(processedContactRequests.Contains(senderName)))
+                        HttpWebRequest webRequest = parentSkype.mainFactory.createWebRequest_GET("https://api.skype.com/users/self/contacts/auth-request", new string[][] { new string[] { "X-Skypetoken", parentSkype.authTokens.SkypeToken } });
+                        string rawInfo = "";
+                        using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
                         {
-                            processedContactRequests.Add(senderName);
-                            User requestSender = parentSkype.GetUser(senderName);
-                            ContactRequest newRequest = new ContactRequest(parentSkype);
-                            newRequest.Sender = requestSender;
-                            newRequest.Body = ((string)singleRequest.greeting).HtmlDecode();
-                            parentSkype.invokeContactRequestReceived(newRequest);
+                            rawInfo = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
                         }
+                        dynamic allData = JsonConvert.DeserializeObject(rawInfo);
+                        foreach (dynamic singleRequest in allData)
+                        {
+                            string senderName = (string)singleRequest.sender;
+                            if (!(processedContactRequests.Contains(senderName)))
+                            {
+                                processedContactRequests.Add(senderName);
+                                User requestSender = parentSkype.GetUser(senderName);
+                                ContactRequest newRequest = new ContactRequest(parentSkype);
+                                newRequest.Sender = requestSender;
+                                newRequest.Body = ((string)singleRequest.greeting).HtmlDecode();
+                                parentSkype.invokeContactRequestReceived(newRequest);
+                            }
+                        }
+                        Thread.Sleep(10000);
                     }
-                    Thread.Sleep(10000);
+                    catch (Exception thrownException)
+                    {
+                        Console.WriteLine(thrownException.ToString());
+                    }
                 }
             }).Start();
         }

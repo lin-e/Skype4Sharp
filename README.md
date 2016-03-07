@@ -1,7 +1,7 @@
 # Skype4Sharp
 Simple Web Skype implementation for C#.
 
-Reading this project's source code, compiling as a binary, redistributing assets found in this repository, etc, or ANY form of use, you must agree to the license enlisted below.
+By reading this project's source code, compiling as a binary, redistributing assets found in this repository, etc, or ANY form of use, you must agree to the license enlisted below.
 
 If you do anything cool with this library, be sure to tell me :)
 

@@ -1,24 +1,16 @@
 # Skype4Sharp
-Simple Web Skype implementation for C#
+Simple Web Skype implementation for C#.
 
-If you do anything cool with this lib, be sure to tell me :)
+Reading this project's source code, compiling as a binary, redistributing assets found in this repository, etc, or ANY form of use, you must agree to the license enlisted below.
 
-# [License] (https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md) - You agree to this if you use any of my code.
+If you do anything cool with this library, be sure to tell me :)
 
-# Dependencies
-- [Json.NET] (http://www.newtonsoft.com/json)
+# [License] 
+See: https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md
 
-# Forum Posts (Any post regarding this is not me, other than those listed below)
+# Official Forum Posts (others may be fake)
 - [HackForums] (http://hackforums.net/showthread.php?tid=5187718)
 - [LeakForums] (https://leakforums.net/thread-687213)
-
-# Credits
-- [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. And the MSPN24 token method **[Collaborator]**
-
-> yung trump has permission to skid aids code to c#
-
-- [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having, and moral support
-- [Knackrack615] (http://knackrack615.me/) Helped with basic logic in the library
 
 # Events
 - [x] ChatMembersChanged
@@ -32,6 +24,16 @@ If you do anything cool with this lib, be sure to tell me :)
 - [x] GroupPictureChanged
 - [x] FileReceived
 - [ ] PictureReceived
+
+# Credits
+- [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. Also, the authentication code. 
+> yung trump has permission to skid aids code to c#
+
+- [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having, and making lin-e wet in his every hole (a.k.a. "moral support")
+- [Knackrack615] (http://knackrack615.me/) Helped with basic logic in the library
+
+# Dependencies
+- [Json.NET] (http://www.newtonsoft.com/json)
 
 # Usage
 Look at the example bot for a working template, but if you really need full documentation, I'll provide it below.

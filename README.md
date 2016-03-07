@@ -13,7 +13,7 @@ If you do anything cool with this lib, be sure to tell me :)
 - [LeakForums] (https://leakforums.net/thread-687213)
 
 # Credits
-- [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. And the MSPN24 token method
+- [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. And the MSPN24 token method [b]Collaborator[/b]
 
 > yung trump has permission to skid aids code to c#
 

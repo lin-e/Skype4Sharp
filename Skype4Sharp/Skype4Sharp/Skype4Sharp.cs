@@ -1,65 +1,86 @@
 ﻿using System.Net;
+using Skype4Sharp.Auth;
+using Skype4Sharp.Enums;
+using Skype4Sharp.Events;
+using Skype4Sharp.Exceptions;
+using Skype4Sharp.Helpers;
+using Skype4Sharp.Skype4SharpCore;
 
 namespace Skype4Sharp
 {
     public class Skype4Sharp
     {
-        public event Events.MessageReceived messageReceived;
-        public event Events.ContactReceived contactReceived;
-        public event Events.MessageEdited messageEdited;
-        public event Events.ChatMembersChanged chatMembersChanged;
-        public event Events.TopicChange topicChange;
-        public event Events.ContactRequestReceived contactRequestReceived;
-        public event Events.CallStarted callStarted;
-        public event Events.FileReceived fileReceived;
-        public event Events.ChatPictureChanged chatPictureChanged;
-        public event Events.UserRoleChanged userRoleChanged;
+        public event MessageReceived messageReceived;
+        public event ContactReceived contactReceived;
+        public event MessageEdited messageEdited;
+        public event ChatMembersChanged chatMembersChanged;
+        public event TopicChange topicChange;
+        public event ContactRequestReceived contactRequestReceived;
+        public event CallStarted callStarted;
+        public event FileReceived fileReceived;
+        public event ChatPictureChanged chatPictureChanged;
+        public event UserRoleChanged userRoleChanged;
 
-        public Auth.SkypeCredentials authInfo;
-        public Auth.Tokens authTokens = new Auth.Tokens();
+        public SkypeCredentials authInfo;
+        public Tokens authTokens = new Tokens();
         public User selfProfile;
-        public Helpers.WebRequestFactory mainFactory;
-        public Enums.LoginState authState = Enums.LoginState.Unknown;
-        public Enums.SkypeTokenType tokenType = Enums.SkypeTokenType.Standard;
+        public WebRequestFactory mainFactory;
+        public LoginState authState = LoginState.Unknown;
+        public SkypeTokenType tokenType = SkypeTokenType.Standard;
         public bool ignoreOwnEvents = true;
 
-        private Events.Poller mainPoll;
+        private Poller mainPoll;
         private WebProxy mainProxy;
-        private Skype4SharpCore.UserModule mainUserModule;
-        private Skype4SharpCore.AuthModule mainAuthModule;
-        private Skype4SharpCore.MessageModule mainMessageModule;
-        private Skype4SharpCore.ContactModule mainContactModule;
-        public Skype4Sharp(Auth.SkypeCredentials loginData, WebProxy loginProxy = null)
+        private UserModule mainUserModule;
+        private AuthModule mainAuthModule;
+        private MessageModule mainMessageModule;
+        private ContactModule mainContactModule;
+        public Skype4Sharp(SkypeCredentials loginData, WebProxy loginProxy = null)
         {
             authInfo = loginData;
             mainProxy = loginProxy;
-            mainFactory = new Helpers.WebRequestFactory(mainProxy, new CookieContainer());
-            mainPoll = new Events.Poller(this);
+            mainFactory = new WebRequestFactory(mainProxy, new CookieContainer());
+            mainPoll = new Poller(this);
             selfProfile = new User(this);
-            mainUserModule = new Skype4SharpCore.UserModule(this);
-            mainAuthModule = new Skype4SharpCore.AuthModule(this);
-            mainMessageModule = new Skype4SharpCore.MessageModule(this);
-            mainContactModule = new Skype4SharpCore.ContactModule(this);
+            mainUserModule = new UserModule(this);
+            mainAuthModule = new AuthModule(this);
+            mainMessageModule = new MessageModule(this);
+            mainContactModule = new ContactModule(this);
         }
         public void StartPoll()
         {
             blockUnauthorized();
             mainPoll.StartPoll();
         }
-        public bool Login()
+        public void StopPoll()
         {
-            if (authState == Enums.LoginState.Success)
-            {
-                throw new Exceptions.InvalidSkypeActionException("You are already signed in");
-            }
-            return mainAuthModule.Login();
+            blockUnauthorized();
+            mainPoll.StopPoll();
         }
-        public ChatMessage SendMessage(Chat targetChat, string newMessage, Enums.MessageType messageType = Enums.MessageType.Text)
+        public bool Login(bool bypassLogin = false)
+        {
+            if (!bypassLogin)
+            {
+                if (authState == LoginState.Success)
+                {
+                    throw new InvalidSkypeActionException("You are already signed in");
+                }
+                return mainAuthModule.Login();
+            }
+            else
+            {
+                mainPoll.StopPoll();
+                bool loginSuccess = mainAuthModule.Login();
+                mainPoll.StartPoll();
+                return loginSuccess;
+            }
+        }
+        public ChatMessage SendMessage(Chat targetChat, string newMessage, MessageType messageType = MessageType.Text)
         {
             blockUnauthorized();
             return mainMessageModule.createMessage(targetChat, newMessage, messageType);
         }
-        public ChatMessage SendMessage(string targetUser, string newMessage, Enums.MessageType messageType = Enums.MessageType.Text)
+        public ChatMessage SendMessage(string targetUser, string newMessage, MessageType messageType = MessageType.Text)
         {
             blockUnauthorized();
             Chat targetChat = new Chat(this);
@@ -100,6 +121,7 @@ namespace Skype4Sharp
         }
         public void invokeMessageReceived(ChatMessage pMessage)
         {
+            if (messageReceived == null) { return; }
             if (ignoreOwnEvents)
             {
                 if (pMessage.Sender.Username == selfProfile.Username)
@@ -107,14 +129,11 @@ namespace Skype4Sharp
                     return;
                 }
             }
-            try
-            {
-                messageReceived.Invoke(pMessage);
-            }
-            catch { }
+            messageReceived.Invoke(pMessage);
         }
         public void invokeContactReceived(User receivedUser, Chat originChat, User originUser)
         {
+            if (contactReceived == null) { return; }
             if (ignoreOwnEvents)
             {
                 if (originUser.Username == selfProfile.Username)
@@ -122,14 +141,11 @@ namespace Skype4Sharp
                     return;
                 }
             }
-            try
-            {
-                contactReceived.Invoke(receivedUser, originChat, originUser);
-            }
-            catch { }
+            contactReceived.Invoke(receivedUser, originChat, originUser);
         }
         public void invokeMessageEdited(ChatMessage pMessage)
         {
+            if (messageEdited == null) { return; }
             if (ignoreOwnEvents)
             {
                 if (pMessage.Sender.Username == selfProfile.Username)
@@ -137,72 +153,48 @@ namespace Skype4Sharp
                     return;
                 }
             }
-            try
-            {
-                messageEdited.Invoke(pMessage);
-            }
-            catch { }
+            messageEdited.Invoke(pMessage);
         }
-        public void invokeChatMembersChanged(Chat newChat, User eventInitiator, User eventTarget, Enums.ChatMemberChangedType changeType)
+        public void invokeChatMembersChanged(Chat newChat, User eventInitiator, User eventTarget, ChatMemberChangedType changeType)
         {
-            try
-            {
-                chatMembersChanged.Invoke(newChat, eventInitiator, eventTarget, changeType);
-            }
-            catch { }
+            if (chatMembersChanged == null) { return; }
+            chatMembersChanged.Invoke(newChat, eventInitiator, eventTarget, changeType);
         }
         public void invokeTopicChange(Chat targetChat, User eventInitiator, string newTopic)
         {
-            try
-            {
-                topicChange.Invoke(targetChat, eventInitiator, newTopic);
-            }
-            catch { }
+            if (topicChange == null) { return; }
+            topicChange.Invoke(targetChat, eventInitiator, newTopic);
         }
-        public void invokeContactRequestReceived(Events.ContactRequest sentRequest)
+        public void invokeContactRequestReceived(ContactRequest sentRequest)
         {
-            try
-            {
-                contactRequestReceived.Invoke(sentRequest);
-            }
-            catch { }
+            if (contactRequestReceived == null) { return; }
+            contactRequestReceived.Invoke(sentRequest);
         }
         public void invokeCallStarted(Chat originChat, User eventInitiator)
         {
-            try
-            {
-                callStarted.Invoke(originChat, eventInitiator);
-            } catch { }
+            if (callStarted == null) { return; }
+            callStarted.Invoke(originChat, eventInitiator);
         }
         public void invokeFileReceived(Events.SkypeFile sentFile)
         {
-            try
-            {
-                fileReceived.Invoke(sentFile);
-            }
-            catch { }
+            if (fileReceived == null) { return; }
+            fileReceived.Invoke(sentFile);
         }
         public void invokeChatPictureChanged(Chat targetChat, User eventInitiator, string newPicture)
         {
-            try
-            {
-                chatPictureChanged.Invoke(targetChat, eventInitiator, newPicture);
-            }
-            catch { }
+            if (chatPictureChanged == null) { return; }
+            chatPictureChanged.Invoke(targetChat, eventInitiator, newPicture);
         }
         public void invokeUserRoleChanged(Chat newChat, User eventInitiator, User eventTarget, Enums.ChatRole newRole)
         {
-            try
-            {
-                userRoleChanged.Invoke(newChat, eventInitiator, eventTarget, newRole);
-            }
-            catch { }
+            if (userRoleChanged == null) { return; }
+            userRoleChanged.Invoke(newChat, eventInitiator, eventTarget, newRole);
         }
         private void blockUnauthorized()
         {
-            if (authState != Enums.LoginState.Success)
+            if (authState != LoginState.Success)
             {
-                throw new Exceptions.InvalidSkypeActionException("Not signed in");
+                throw new InvalidSkypeActionException("Not signed in");
             }
         }
     }

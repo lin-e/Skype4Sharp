@@ -72,7 +72,8 @@ namespace ExampleBot
                                     commandPrefix + "currency - idk shows you currency info or something" +
                                     commandPrefix + "btcwallet - generates a bitcoin wallet keypair" + 
                                     commandPrefix + "numberfact <number> [math|trivia|year] - idk number facts or something".HtmlEncode() +
-                                    commandPrefix + "visualdns <URL> - visualises a domain's dns. (no shit)".HtmlEncode();
+                                    commandPrefix + "visualdns <URL> - visualises a domain's dns (no shit)".HtmlEncode() +
+                                    commandPrefix + "about - shit about this bot";
                                 }
                                 break;
                             case "ping":
@@ -182,6 +183,19 @@ namespace ExampleBot
                                     {
                                         rMessage.Body = "Syntax error. The correct syntax for this command is " + triggerString + "visualdns <URL>".HtmlEncode();
                                     }
+                                }
+                                break;
+                            case "about":
+                                {
+                                    rMessage.Body = "About this bot (Skype4Sharp Testing):" + Environment.NewLine
+                                    + "    API: <a href=\"https://github.com/lin-e/Skype4Sharp\">Skype4Sharp</a>" + Environment.NewLine
+                                    + "    Creator: <a href=\"https://twitter.com/c0mmodity\">Commodity</a>" + Environment.NewLine
+                                    + "    Host: <a href=\"https://www.raspberrypi.org/products/raspberry-pi-2-model-b/\">Rasperry Pi 2 Model B (mono)</a>";
+                                }
+                                break;
+                            case "stoppoll":
+                                {
+                                    mainSkype.StopPoll();
                                 }
                                 break;
                             default:

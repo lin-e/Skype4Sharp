@@ -29,7 +29,7 @@ See: https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md
 - [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. Also, the authentication code. 
 > yung trump has permission to skid aids code to c#
 
-- [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having, and making lin-e wet in his every hole (a.k.a. "moral support")
+- [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having (a.k.a. "moral support")
 - [Knackrack615] (http://knackrack615.me/) Helped with basic logic in the library
 
 # Dependencies

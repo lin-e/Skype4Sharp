@@ -5,12 +5,18 @@ By reading this project's source code, compiling as a binary, redistributing ass
 
 If you do anything cool with this library, be sure to tell me :)
 
-# [License] 
+# License 
 See: https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md
 
 # Official Forum Posts (others may be fake)
 - [HackForums] (http://hackforums.net/showthread.php?tid=5187718)
 - [LeakForums] (https://leakforums.net/thread-687213)
+
+# Bots running this API
+I don't endorse any of them, mainly cause they're just bad. (love you all)
+
+- [SimpleSkype] (https://github.com/lin-e/SimpleSkype) (I feel like I have to add this, cause it's my own plugin-based bot running this API)
+- [tafaBot] (http://hatscripts.com/addskype?tafabot)
 
 # Events
 - [x] ChatMembersChanged

@@ -46,7 +46,7 @@ Look at the example bot for a working template, but if you really need full docu
 The example is in C# Console, but it should be easy enough to adapt.
 
 Logging in
-```
+```C#
 static Skype4Sharp.Skype4Sharp mainSkype;
 static SkypeCredentials authCreds = new SkypeCredentials("USERNAME", "PASSWORD");
 static void Main(string[] args)
@@ -56,28 +56,28 @@ static void Main(string[] args)
 }
 ```
 Setting events
-```
+```C#
 mainSkype.messageReceived += MainSkype_messageReceived;
 mainSkype.contactRequestReceived += MainSkype_contactRequestReceived;
 // Do the rest of the events yourself, these are the two most important ones in my opinion
 mainSkype.StartPoll();
 ```
 Accepting a contact
-```
+```C#
 private static void MainSkype_contactRequestReceived(ContactRequest sentRequest)
 {
   sentRequest.Accept();
 }
 ```
 Declining a contact
-```
+```C#
 private static void MainSkype_contactRequestReceived(ContactRequest sentRequest)
 {
   sentRequest.Decline();
 }
 ```
 Sending a group message, editing it and more
-```
+```C#
 private static void MainSkype_messageReceived(ChatMessage pMessage)
 {
   ChatMessage rMessage = pMessage.Chat.SendMessage("Processing your message...");
@@ -87,16 +87,16 @@ private static void MainSkype_messageReceived(ChatMessage pMessage)
 }
 ```
 Messaging a user
-```
+```C#
 ChatMessage rMessage = mainSkype.SendMessage("c0mmodity", "Hello me!");
 ```
 Adding or removing a user
-```
+```C#
 mainSkype.AddUser("c0mmodity", "I'd like to add you on Skype!");
 mainSkype.RemoveUser("c0mmodity");
 ```
 Interacting with a chat (put in context, so it's easier for me to explain)
-```
+```C#
 private static void MainSkype_messageReceived(ChatMessage pMessage)
 {
   Chat newChat = pMessage.Chat;
@@ -111,7 +111,7 @@ private static void MainSkype_messageReceived(ChatMessage pMessage)
 }
 ```
 Logging a call
-```
+```C#
 private void MainSkype_callStarted(Chat originChat, User eventInitiator)
 {
   Console.WriteLine("[EVENT]: CALL_STARTED > {0} ({1})", originChat.ID, eventInitiator.Username);

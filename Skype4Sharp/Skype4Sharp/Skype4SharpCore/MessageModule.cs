@@ -20,6 +20,7 @@ namespace Skype4Sharp.Skype4SharpCore
             ChatMessage toReturn = new ChatMessage(parentSkype);
             toReturn.Body = chatMessage;
             toReturn.Chat = targetChat;
+            toReturn.Type = messageType;
             toReturn.ID = Helpers.Misc.getTime().ToString();
             toReturn.Sender = parentSkype.selfProfile;
             sendChatmessage(toReturn);

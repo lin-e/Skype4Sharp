@@ -1,5 +1,3 @@
-thx 4 the stars, stack.
-
 # Skype4Sharp
 Simple Web Skype implementation for C#.
 

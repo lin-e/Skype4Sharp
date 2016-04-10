@@ -16,7 +16,7 @@ See: https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md
 I don't endorse any of them, mainly cause they're just bad. (love you all)
 
 - [SimpleSkype] (https://github.com/lin-e/SimpleSkype) (I feel like I have to add this, cause it's my own plugin-based bot running this API)
-- [tafaBot] (http://hatscripts.com/addskype?tafabot.lnk)
+- [KranchyBot] (http://hatscripts.com/addskype?kranchy.bot)
 - [illegalBot] (http://hatscripts.com/addskype?illegalpw)
 
 # Events

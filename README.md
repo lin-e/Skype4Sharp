@@ -1,4 +1,7 @@
 # Skype4Sharp
+
+Please consider this lib broken until further notice; as of now, the issue is getting the SkypeToken, which seems to be empty, causing the RegToken function to throw an error.
+
 Simple Web Skype implementation for C#.
 
 > Best .NET Skype API (by default)

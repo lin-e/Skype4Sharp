@@ -57,7 +57,7 @@ namespace Skype4Sharp.Skype4SharpCore
                         rawJSON = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
                     }
                     dynamic decodedJSON = JsonConvert.DeserializeObject(rawJSON);
-                    return decodedJSON ? decodedJSON.skypetoken : null;
+                    return decodedJSON != null ? decodedJSON.skypetoken : null;
                 default:
                     return null;
             }

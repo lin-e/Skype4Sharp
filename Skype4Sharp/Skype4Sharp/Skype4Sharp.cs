@@ -26,7 +26,7 @@ namespace Skype4Sharp
         public User selfProfile;
         public WebRequestFactory mainFactory;
         public LoginState authState = LoginState.Unknown;
-        public SkypeTokenType tokenType = SkypeTokenType.Standard;
+        public SkypeTokenType tokenType = SkypeTokenType.MSNP24;
         public bool ignoreOwnEvents = true;
 
         private Poller mainPoll;

@@ -51,10 +51,13 @@ namespace Skype4Sharp.Skype4SharpCore
                     }
                 case Enums.SkypeTokenType.MSNP24:
                     HttpWebRequest MSNP24TokenRequest = parentSkype.mainFactory.createWebRequest_POST("https://api.skype.com/login/skypetoken", new string[][] { }, Encoding.ASCII.GetBytes(string.Format("scopes=client&clientVersion=0/7.17.0.105//&username={0}&passwordHash={1}", parentSkype.authInfo.Username, Convert.ToBase64String(Helpers.Misc.hashMD5_Byte(string.Format("{0}\nskyper\n{1}", parentSkype.authInfo.Username, parentSkype.authInfo.Password))))), "");
+                    string rawJSON = "";
                     using (HttpWebResponse webResponse = (HttpWebResponse)MSNP24TokenRequest.GetResponse())
                     {
-                        return new Regex("{\"skypetoken\":\"(.*?)\",\"expiresIn\":86400}").Match(new StreamReader(webResponse.GetResponseStream()).ReadToEnd()).Groups[1].ToString();
+                        rawJSON = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
                     }
+                    dynamic decodedJSON = JsonConvert.DeserializeObject(rawJSON);
+                    return decodedJSON != null ? decodedJSON.skypetoken : null;
                 default:
                     return null;
             }

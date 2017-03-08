@@ -1,6 +1,8 @@
 # Skype4Sharp
 
+# Updates
 Please consider this lib broken until further notice; as of now, the issue is getting the SkypeToken, which seems to be empty, causing the RegToken function to throw an error.
+It goes much deeper than just the login page changing; Skype's entire API has been overhauled to an extent (although using the same system) as most (if not all) of the endpoints have been changed. I, along with Knackrack615, are running tests, and may release an entirely new build if there is enough demand.
 
 Simple Web Skype implementation for C#.
 

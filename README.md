@@ -19,9 +19,9 @@ See: https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md
 # Bots running this API
 I don't endorse any of them, mainly cause they're just bad. (love you all)
 
-- [SimpleSkype] (https://github.com/lin-e/SimpleSkype) (I feel like I have to add this, cause it's my own plugin-based bot running this API)
-- [KranchyBot] (http://hatscripts.com/addskype?kranchy.bot)
-- [illegalBot] (http://hatscripts.com/addskype?illegalpw)
+- [SimpleSkype](https://github.com/lin-e/SimpleSkype) (I feel like I have to add this, cause it's my own plugin-based bot running this API)
+- [KranchyBot](http://hatscripts.com/addskype?kranchy.bot)
+- [illegalBot](http://hatscripts.com/addskype?illegalpw)
 
 # Events
 - [x] ChatMembersChanged
@@ -156,6 +156,6 @@ A : Raise it as an issue, and I'll sort it out when I can. Please understand tha
 ---
 Q : Wow! This is amazing, how can I help? (yeah, no-one's actually said this, but it'd be nice, y'know?)
 
-A : You can donate to me via Bitcoin (1BKbYhqNVkKzZ5Q5p7Jtb2MyautnqBC9Qm), or just send me a nice message :smile:
+A : You can donate to me via Bitcoin (1EugenekHHxybWkaeb566mnUKtpfEiyPSu), or just send me a nice message :smile:
 
 ---

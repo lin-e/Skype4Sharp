@@ -1,9 +1,7 @@
 # Skype4Sharp
 
 # Updates
-Please consider this lib broken until further notice; as of now, the issue is getting the SkypeToken, which seems to be empty, causing the RegToken function to throw an error.
-
-It goes much deeper than just the login page changing; Skype's entire API has been overhauled to an extent (although using the same system) as most (if not all) of the endpoints have been changed. I'm running tests, and may release an entirely new build if there is enough demand for it.
+Login was fixed (check credits) however some endpoints remain broken or missing, and as always, I am not liable for anything that happens to your account as a result of using the library.
 
 Simple Web Skype implementation for C#.
 
@@ -17,11 +15,9 @@ If you do anything cool with this library, be sure to tell me :)
 See: https://github.com/lin-e/Skype4Sharp/blob/master/LICENSE.md
 
 # Bots running this API
-I don't endorse any of them, mainly cause they're just bad. (love you all)
+I don't endorse any of them, mainly cause they're just bad.
 
 - [SimpleSkype](https://github.com/lin-e/SimpleSkype) (I feel like I have to add this, cause it's my own plugin-based bot running this API)
-- [KranchyBot](http://hatscripts.com/addskype?kranchy.bot)
-- [illegalBot](http://hatscripts.com/addskype?illegalpw)
 
 # Events
 - [x] ChatMembersChanged
@@ -40,11 +36,12 @@ I don't endorse any of them, mainly cause they're just bad. (love you all)
 - [Ghost] (https://github.com/NotGGhost/) Skidded so much code off him. Also, the authentication code. 
 > yung trump has permission to skid aids code to c#
 
-- [SpongyBacon] (https://github.com/sponges) Helped with any issues I was having (a.k.a. "moral support")
-- [Knackrack615] (http://knackrack615.me/) Helped with basic logic in the library
+- [SpongyBacon](https://github.com/sponges) Helped with any issues I was having (a.k.a. "moral support")
+- [Knackrack615](http://knackrack615.me/) Testing
+- [XeroxDev](https://xeroxdev.de)
 
 # Dependencies
-- [Json.NET] (http://www.newtonsoft.com/json)
+- [Json.NET](http://www.newtonsoft.com/json)
 
 # Usage
 Look at the example bot for a working template, but if you really need full documentation, I'll provide it below.
